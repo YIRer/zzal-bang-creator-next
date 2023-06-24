@@ -1,0 +1,256 @@
+{
+  "animal": [
+    {
+      "path": "/template/animal/001.png",
+      "name": "슬픈 고양이"
+    },
+    {
+      "path": "/template/animal/002.png",
+      "name": "슬픈 고양이"
+    },
+    {
+      "path": "/template/animal/003.png",
+      "name": "슬픈 고양이"
+    },
+    {
+      "path": "/template/animal/004.png",
+      "name": "슬픈 고양이"
+    },
+    {
+      "path": "/template/animal/005.png",
+      "name": "슬픈 고양이"
+    },
+    {
+      "path": "/template/animal/006.png",
+      "name": "Woman Yelling at a Cat"
+    },
+    {
+      "path": "/template/animal/007.png",
+      "name": "갈매기"
+    }
+  ],
+  "anime": [
+    {
+      "path": "/template/anime/001.png",
+      "name": "ㅇㅇ해야한다고 생각해요"
+    },
+    {
+      "path": "/template/anime/002.png",
+      "name": "빈 상자"
+    },
+    {
+      "path": "/template/anime/003.png",
+      "name": "자전거"
+    },
+    {
+      "path": "/template/anime/004.png",
+      "name": "그게 무슨 소리니"
+    },
+    {
+      "path": "/template/anime/005.png",
+      "name": "그게 무슨 소리니2"
+    },
+    {
+      "path": "/template/anime/006.png",
+      "name": "밥 줘"
+    },
+    {
+      "path": "/template/anime/007.png",
+      "name": "호의가 계속되면"
+    },
+    {
+      "path": "/template/anime/008.png",
+      "name": "선 넘네"
+    },
+    {
+      "path": "/template/anime/009.png",
+      "name": "반전"
+    },
+    {
+      "path": "/template/anime/010.png",
+      "name": "마따끄"
+    },
+    {
+      "path": "/template/anime/011.png",
+      "name": "몰?루"
+    },
+    {
+      "path": "/template/anime/012.png",
+      "name": "ㅇㅇ가... 말대꾸 ??"
+    },
+    {
+      "path": "/template/anime/013.png",
+      "name": "미안하다이거보여주려고어그로끌었다"
+    },
+    {
+      "path": "/template/anime/014.png",
+      "name": "서늘하고 묵직한 감각"
+    },
+    {
+      "path": "/template/anime/015.png",
+      "name": "군침이 싹"
+    },
+    {
+      "path": "/template/anime/016.png",
+      "name": "일어나"
+    },
+    {
+      "path": "/template/anime/017.png",
+      "name": "질러라"
+    },
+    {
+      "path": "/template/anime/018.png",
+      "name": "조삼모사"
+    },
+    {
+      "path": "/template/anime/019.png",
+      "name": "승리의 주문"
+    },
+    {
+      "path": "/template/anime/020.png",
+      "name": "그리움"
+    },
+    {
+      "path": "/template/anime/022.png",
+      "name": "하이디"
+    },
+    {
+      "path": "/template/anime/023.png",
+      "name": "배트맨"
+    }
+  ],
+  "etd": [
+    {
+      "path": "/template/etc/001.png",
+      "name": "행복 회로"
+    },
+    {
+      "path": "/template/etc/002.png",
+      "name": "갈림길"
+    }
+  ],
+  "human": [
+    {
+      "path": "/template/human/001.png",
+      "name": "바람"
+    },
+    {
+      "path": "/template/human/002.png",
+      "name": "방화"
+    },
+    {
+      "path": "/template/human/003.png",
+      "name": "고객 대응"
+    },
+    {
+      "path": "/template/human/004.png",
+      "name": "반전"
+    },
+    {
+      "path": "/template/human/005.png",
+      "name": "그것이 그것이니까"
+    },
+    {
+      "path": "/template/human/006.png",
+      "name": "참 쉽죠?"
+    },
+    {
+      "path": "/template/human/007.png",
+      "name": "개비스 콘"
+    },
+    {
+      "path": "/template/human/008.png",
+      "name": "응 ㅇㅇ하면 그만이야~"
+    },
+    {
+      "path": "/template/human/009.png",
+      "name": "비교"
+    }
+  ],
+  "pepe": [
+    {
+      "path": "/template/pepe/001.png",
+      "name": "슬픈 개구리"
+    },
+    {
+      "path": "/template/pepe/002.png",
+      "name": "슬픈 개구리(고퀄)"
+    },
+    {
+      "path": "/template/pepe/003.png",
+      "name": "자살 개구리"
+    },
+    {
+      "path": "/template/pepe/004.png",
+      "name": "자살 개구리(총)"
+    },
+    {
+      "path": "/template/pepe/005.png",
+      "name": "백수 개구리"
+    },
+    {
+      "path": "/template/pepe/006.png",
+      "name": "슬픈 개구리(눈물)"
+    },
+    {
+      "path": "/template/pepe/007.png",
+      "name": "생각하는 개구리"
+    },
+    {
+      "path": "/template/pepe/008.png",
+      "name": "펀치 개구리"
+    },
+    {
+      "path": "/template/pepe/009.png",
+      "name": "따봉 개구리"
+    },
+    {
+      "path": "/template/pepe/010.png",
+      "name": "짠하는 개구리"
+    },
+    {
+      "path": "/template/pepe/011.png",
+      "name": "짠하는 개구리(3D)"
+    },
+    {
+      "path": "/template/pepe/012.png",
+      "name": "화내는 개구리"
+    },
+    {
+      "path": "/template/pepe/013.png",
+      "name": "놀란/암 걸리는 개구리"
+    },
+    {
+      "path": "/template/pepe/014.png",
+      "name": "화내는 개구리"
+    },
+    {
+      "path": "/template/pepe/015.png",
+      "name": "울분을 토하는 개구리"
+    },
+    {
+      "path": "/template/pepe/016.png",
+      "name": "생각하는 개구리"
+    },
+    {
+      "path": "/template/pepe/017.png",
+      "name": "찌그러진 개구리"
+    },
+    {
+      "path": "/template/pepe/018.png",
+      "name": "맥도날드에서 넘어진 개구리"
+    },
+    {
+      "path": "/template/pepe/019.png",
+      "name": "놀란 개구리"
+    },
+    {
+      "path": "/template/pepe/020.png",
+      "name": "광대 개구리"
+    },
+    {
+      "path": "/template/pepe/021.png",
+      "name": "날 지켜봐 줘!"
+    }
+  ]
+}
