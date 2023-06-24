@@ -1,50 +1,94 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import KonvaController, { CurrentObject } from './lib/KonvaController';
+import React, { useRef } from 'react';
+import ObjectController from './ObjectController';
+import useKonvaCanvas from './hooks/useKonvaCanvas';
+import ObjectLayerController from './ObjectLayerController';
+import './canvas.css';
 
 const KonavaCanvas = () => {
-  const [konvaController, setKonvaController] = useState<KonvaController>();
-  const [currentObject, setCurrentObject] = useState<CurrentObject>();
-
-  const addRect = () => {
-    if (konvaController) {
-      konvaController.addRect();
-    }
-  };
-
-  const addCircle = () => {
-    if (konvaController) {
-      konvaController.addCircle();
-    }
-  };
-
-  const addText = () => {
-    if (konvaController) {
-      konvaController.addText();
-    }
-  };
-
-  useEffect(() => {
-    const controller = new KonvaController({
-      id: 'konva-canvas',
-      onSelectObject: setCurrentObject,
-    });
-    setKonvaController(controller);
-    controller.initialize();
-    console.log('loead!');
-  }, []);
+  const imageFile = useRef<HTMLInputElement>(null);
+  const {
+    konvaController,
+    currentObject,
+    cavnasWidth,
+    cavnasHeight,
+    objects,
+    addRect,
+    addCircle,
+    addStar,
+    addText,
+    updateCanvasSize,
+    resizeCanvas,
+    updateAttr,
+    onExportImageClick,
+    onFileUploadChange,
+    onZoomInClick,
+    onZoomOutClick,
+    onZoomResetClick,
+    moveToTop,
+    moveToFoward,
+    moveToBottom,
+    moveToBackward,
+  } = useKonvaCanvas({
+    onDeleteObject: (target) => {
+      if (target?.attrs.name === 'image' && imageFile.current) {
+        imageFile.current.value = '';
+      }
+    },
+  });
 
   return (
-    <>
-      <div id="konva-canvas"></div>
+    <div id="konva-canvas-conainer">
+      <div tabIndex={0} id="konva-canvas-wrapper">
+        <div id="konva-canvas"></div>
+      </div>
       <div>
         <button onClick={addRect}>add rect</button>
         <button onClick={addCircle}>add circle</button>
+        <button onClick={addStar}>add star</button>
         <button onClick={addText}>add text</button>
-        <button>change text</button>
+        <button onClick={onZoomInClick}>zoom in</button>
+        <button onClick={onZoomOutClick}>zoom out</button>
+        <button onClick={onZoomResetClick}>zoom reset</button>
+        <button onClick={onExportImageClick}>export image</button>
+        <input
+          ref={imageFile}
+          type="file"
+          id="canvas-file"
+          onChange={onFileUploadChange}
+        />
+        <div>
+          <input
+            onChange={(e) => updateCanvasSize(e, 'width')}
+            type={'number'}
+            name={'canvas-width'}
+            value={cavnasWidth}
+            min={1}
+          />
+          <input
+            onChange={(e) => updateCanvasSize(e, 'height')}
+            type={'number'}
+            name={'canvas-height'}
+            value={cavnasHeight}
+            min={1}
+          />
+          <button onClick={resizeCanvas}>apply</button>
+        </div>
       </div>
-      {currentObject && <div>controller</div>}
-    </>
+      <ObjectLayerController
+        objects={objects}
+        moveToTop={moveToTop}
+        moveToFoward={moveToFoward}
+        moveToBackward={moveToBackward}
+        moveToBottom={moveToBottom}
+      />
+      {currentObject && konvaController && (
+        <ObjectController
+          currentObject={currentObject}
+          updateAttr={updateAttr}
+        />
+      )}
+    </div>
   );
 };
 

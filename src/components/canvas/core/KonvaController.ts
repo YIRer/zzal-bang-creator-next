@@ -5,7 +5,8 @@ export type CurrentObject =
   | Konva.Shape
   | Konva.Image
   | Konva.Text
-  | Konva.Stage;
+  | Konva.Stage
+  | Konva.Star;
 
 class KonvaController {
   private id: string;
@@ -17,15 +18,22 @@ class KonvaController {
     width: 500,
     height: 500,
   };
+  private zoomLevel: number = 1;
   private transfomer: Konva.Transformer;
   private handleSelectObject: (target?: CurrentObject) => void;
+  private handleDeleteObject: (target?: CurrentObject) => void;
+  private handleUpdateObjects?: (objects: CurrentObject[]) => void;
 
   constructor({
     id,
     onSelectObject,
+    onDeleteObject,
+    handleUpdateObjects,
   }: {
     id: string;
     onSelectObject: (target?: CurrentObject) => void;
+    onDeleteObject: (target?: CurrentObject) => void;
+    handleUpdateObjects?: (objects: CurrentObject[]) => void;
   }) {
     this.id = id;
     this.stage = new Konva.Stage({
@@ -53,16 +61,22 @@ class KonvaController {
 
     this.currentObject = this.stage;
     this.handleSelectObject = onSelectObject;
+    this.handleDeleteObject = onDeleteObject;
+    if (handleUpdateObjects) {
+      this.handleUpdateObjects = handleUpdateObjects;
+    }
   }
+
   initialize = () => {
     this.constianer.tabIndex = 1;
+
     this.constianer.addEventListener('keydown', (e) => {
       if (e.key === 'Delete') {
         this.removeObject();
       }
     });
 
-    this.stage.on('click tab', (e) => {
+    this.stage.on('click tab touch', (e) => {
       if (e.target.name().length > 0) {
         this.currentObject = e.target;
       }
@@ -85,6 +99,14 @@ class KonvaController {
     return this.stage.getLayers();
   };
 
+  getObjects = () => {
+    return this.getLayers()[0]
+      .getChildren()
+      .filter(
+        (object) => object.className !== 'Transformer'
+      ) as CurrentObject[];
+  };
+
   getCurrentObject = () => {
     return this.currentObject;
   };
@@ -95,7 +117,7 @@ class KonvaController {
       height: 50,
       x: 0,
       y: 0,
-      fill: 'green',
+      fill: 'white',
       strokeWidth: 1,
       stroke: 'grey',
       name: 'rect',
@@ -104,6 +126,8 @@ class KonvaController {
     });
 
     this.layer.add(rectNode);
+
+    this.onUpdateObjects();
   };
 
   addCircle = (configs: Konva.ShapeConfig = {}) => {
@@ -112,7 +136,7 @@ class KonvaController {
       height: 50,
       x: 25,
       y: 25,
-      fill: 'green',
+      fill: 'white',
       strokeWidth: 1,
       stroke: 'grey',
       name: 'circle',
@@ -121,6 +145,28 @@ class KonvaController {
     });
 
     this.layer.add(circleNode);
+    this.onUpdateObjects();
+  };
+
+  addStar = (configs: Konva.ShapeConfig = {}) => {
+    const circleNode = new Konva.Star({
+      width: 50,
+      height: 50,
+      x: 100,
+      y: 100,
+      fill: 'yellow',
+      strokeWidth: 1,
+      stroke: 'grey',
+      name: 'star',
+      numPoints: 5,
+      innerRadius: 40,
+      outerRadius: 70,
+      draggable: true,
+      ...configs,
+    });
+
+    this.layer.add(circleNode);
+    this.onUpdateObjects();
   };
 
   addText = (configs: Konva.TextConfig = {}) => {
@@ -240,14 +286,159 @@ class KonvaController {
     });
 
     this.layer.add(textNode);
+    this.onUpdateObjects();
+  };
+
+  addImage = (image: HTMLImageElement) => {
+    const stage = this.getStage();
+
+    const stageWitdh = stage.width();
+    const stageHeight = stage.height();
+
+    const widthRatio = image.width / stageWitdh;
+    const heightRaio = image.height / stageHeight;
+
+    const imageRatio = image.width / image.height;
+
+    const imageConfig =
+      image.width > image.height
+        ? {
+            width: image.width / widthRatio,
+            height: (image.height / heightRaio) * imageRatio,
+          }
+        : {
+            width: (image.width / widthRatio) * imageRatio,
+            height: image.height / heightRaio,
+          };
+
+    const konvaImage = new Konva.Image({
+      ...imageConfig,
+      image,
+      x: 0,
+      y: 0,
+      draggable: true,
+      name: 'image',
+    });
+
+    this.layer.add(konvaImage);
+    this.layer.draw();
+    this.onUpdateObjects();
   };
 
   removeObject = () => {
     if (!this.currentObject.hasChildren()) {
+      this.handleDeleteObject(this.currentObject);
       this.currentObject.remove();
       this.currentObject.visible(false);
       this.transfomer.nodes([]);
       this.handleSelectObject();
+    }
+    this.onUpdateObjects();
+  };
+
+  resizeCanvase = (size: { width: number; height: number }) => {
+    const stage = this.getStage();
+    stage.width(size.width);
+    stage.height(size.height);
+    stage.scale({ x: 1, y: 1 });
+    this.setSize(size);
+  };
+
+  zoomIn = () => {
+    const stage = this.getStage();
+    const oldScaleX = stage.scaleX();
+    const oldScaleY = stage.scaleY();
+
+    stage.width(stage.width() * 2);
+    stage.height(stage.height() * 2);
+    stage.scale({ x: oldScaleX * 2, y: oldScaleY * 2 });
+    this.zoomLevel += 1;
+  };
+
+  zoomOut = () => {
+    const stage = this.getStage();
+    const oldScaleX = stage.scaleX();
+    const oldScaleY = stage.scaleY();
+
+    stage.width(stage.width() / 2);
+    stage.height(stage.height() / 2);
+    stage.scale({ x: oldScaleX / 2, y: oldScaleY / 2 });
+    this.zoomLevel -= 1;
+  };
+
+  zoomReset = () => {
+    const stage = this.getStage();
+    const originSize = this.size;
+    stage.width(originSize.width);
+    stage.height(originSize.height);
+    stage.scale({ x: 1, y: 1 });
+    this.zoomLevel = 1;
+  };
+
+  onChangeIndex = (index: number) => {
+    if (this.currentObject) {
+      this.currentObject.setZIndex(index);
+    }
+  };
+
+  moveToForwardObject = () => {
+    if (this.currentObject) {
+      this.currentObject.moveUp();
+      this.onUpdateObjects();
+    }
+  };
+
+  moveToBackwardObject = () => {
+    if (this.currentObject) {
+      this.currentObject.moveDown();
+      this.onUpdateObjects();
+    }
+  };
+
+  moveToTopObject = () => {
+    if (this.currentObject) {
+      this.currentObject.moveToTop();
+      this.onUpdateObjects();
+    }
+  };
+
+  moveToBottomObject = () => {
+    if (this.currentObject) {
+      this.currentObject.moveToBottom();
+      this.onUpdateObjects();
+    }
+  };
+
+  setSize = (size: { width: number; height: number }) => {
+    this.size = size;
+  };
+
+  exportImage = () => {
+    const imageUrl = this.layer.toDataURL({
+      mimeType: 'png',
+      x: 0,
+      y: 0,
+      width: 300,
+      height: 300,
+    });
+    const link = document.createElement('a');
+    link.href = imageUrl;
+    link.download = new Date().getTime().toString();
+    link.click();
+  };
+
+  selectCurrentObjectById = (id: number): CurrentObject | undefined => {
+    const targetObject = this.getObjects().find((obj) => obj.attrs.id === id);
+    if (targetObject) {
+      this.currentObject = targetObject as CurrentObject;
+    }
+    return targetObject as CurrentObject | undefined;
+  };
+
+  onUpdateObjects = () => {
+    if (this.handleUpdateObjects) {
+      const objects = this.getObjects();
+      this.handleUpdateObjects(objects);
     }
   };
 }
