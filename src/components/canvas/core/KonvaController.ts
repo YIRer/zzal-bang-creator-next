@@ -6,7 +6,8 @@ export type CurrentObject =
   | Konva.Image
   | Konva.Text
   | Konva.Stage
-  | Konva.Star;
+  | Konva.Star
+  | Konva.RegularPolygon;
 
 class KonvaController {
   private id: string;
@@ -220,6 +221,7 @@ class KonvaController {
       textarea.style.transformOrigin = 'left top';
       textarea.style.textAlign = textNode.align();
       textarea.style.color = textNode.fill();
+      textarea.style.fontWeight = textNode.fontStyle();
 
       const rotation = textNode.rotation();
 
@@ -322,6 +324,46 @@ class KonvaController {
 
     this.layer.add(konvaImage);
     this.layer.draw();
+    this.onUpdateObjects();
+  };
+
+  addArrow = (
+    configs: Konva.ArrowConfig = {
+      points: [20, 60, 100, 60],
+    }
+  ) => {
+    const arrowNode = new Konva.Arrow({
+      x: 0,
+      y: 0,
+      pointerLength: 10,
+      pointerWidth: 10,
+      fill: 'white',
+      stroke: 'black',
+      strokeWidth: 1,
+      name: 'arrow',
+      draggable: true,
+      ...configs,
+    });
+
+    this.layer.add(arrowNode);
+    this.onUpdateObjects();
+  };
+
+  addTriangle = (configs: Omit<Konva.RegularPolygonConfig, 'sides'> = {}) => {
+    const arrowNode = new Konva.RegularPolygon({
+      x: 80,
+      y: 120,
+      sides: 3,
+      radius: 50,
+      fill: '#00D2FF',
+      stroke: 'black',
+      strokeWidth: 1,
+      name: 'triangle',
+      draggable: true,
+      ...configs,
+    });
+
+    this.layer.add(arrowNode);
     this.onUpdateObjects();
   };
 
@@ -428,9 +470,11 @@ class KonvaController {
   };
 
   selectCurrentObjectById = (id: number): CurrentObject | undefined => {
-    const targetObject = this.getObjects().find((obj) => obj.attrs.id === id);
+    const targetObject = this.getObjects().find((obj) => obj._id === id);
+
     if (targetObject) {
       this.currentObject = targetObject as CurrentObject;
+      this.transfomer.nodes([targetObject]);
     }
     return targetObject as CurrentObject | undefined;
   };

@@ -1,0 +1,223 @@
+@font-face {
+  font-family: 'KyoboHandwriting2022khn';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KyoboHandwriting2022khn.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TTWanjudaedunsancheB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/TTWanjudaedunsancheB.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'KBO-Dia-Gothic_bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff')
+    format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HANAMDAUM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'omyu_pretty';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'neurimboGothicRegular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/neurimboGothicRegular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MBC1961GulimM';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961GulimM.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LOTTERIACHAB';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIACHAB.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LOTTERIADDAG';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIADDAG.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NeoDunggeunmoPro-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/NeoDunggeunmoPro-Regular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquareNeo-Variable';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClimateCrisisKR-1979';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/ClimateCrisisKR-1979.woff2')
+    format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LINESeedKR-Bd';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2')
+    format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'bitbit';
+  src: url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),
+    url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2');
+}
+
+@font-face {
+  font-family: 'Tenada';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Tenada.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BMEuljirooraeorae';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/BMEuljirooraeorae.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SF_HambakSnow';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/SF_HambakSnow.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hahmlet-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Regular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Noto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Noto Mono'),
+    url('https://fonts.cdnfonts.com/s/20520/NotoMono-Regular.woff')
+      format('woff');
+}
+
+@font-face {
+  font-family: 'noto serif';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Noto Serif'),
+    url(https://fonts.cdnfonts.com/s/12250/NotoSerif-Regular.woff)
+      format('woff');
+}
+@font-face {
+  font-family: 'noto serif';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Noto Serif'),
+    url(https://fonts.cdnfonts.com/s/12250/NotoSerif-Italic.woff) format('woff');
+}
+@font-face {
+  font-family: 'noto serif';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Noto Serif'),
+    url(https://fonts.cdnfonts.com/s/12250/NotoSerif-Bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'noto serif';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Noto Serif'),
+    url(https://fonts.cdnfonts.com/s/12250/NotoSerif-BoldItalic.woff)
+      format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans Gothic';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Noto Sans Gothic'),
+    url('https://fonts.cdnfonts.com/s/93342/NotoSansGothic-Regular.woff')
+      format('woff');
+}
+
+@font-face {
+  font-family: 'Master Lemon';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Master Lemon'),
+    url('https://fonts.cdnfonts.com/s/99754/Master-Lemon-BF648fc6c4ca4c2.woff')
+      format('woff');
+}
+
+@font-face {
+  font-family: 'Pistoleer';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pistoleer'),
+    url('https://fonts.cdnfonts.com/s/20758/pistoleer.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Americorps';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Americorps'),
+    url('https://fonts.cdnfonts.com/s/20790/americorps.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Eternal Knight';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Eternal Knight'),
+    url('https://fonts.cdnfonts.com/s/22066/eternalknight.woff') format('woff');
+}
+
+body {
+  font-family: 'noto serif';
+}

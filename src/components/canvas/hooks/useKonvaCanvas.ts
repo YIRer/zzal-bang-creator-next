@@ -37,6 +37,18 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     }
   };
 
+  const addArrow = () => {
+    if (konvaController) {
+      konvaController.addArrow();
+    }
+  };
+
+  const addTriangle = () => {
+    if (konvaController) {
+      konvaController.addTriangle();
+    }
+  };
+
   const updateCanvasSize = (
     e: ChangeEvent<HTMLInputElement>,
     type: 'width' | 'height'
@@ -139,6 +151,12 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     setObjects(currentObjects);
   };
 
+  const removeObject = () => {
+    if (konvaController) {
+      konvaController.removeObject();
+    }
+  };
+
   useEffect(() => {
     const controller = new KonvaController({
       id: 'konva-canvas',
@@ -161,6 +179,8 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     addCircle,
     addStar,
     addText,
+    addArrow,
+    addTriangle,
     updateCanvasSize,
     resizeCanvas,
     updateAttr,
@@ -174,6 +194,7 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     moveToBottom,
     moveToBackward,
     selectCurrentObject,
+    removeObject,
   };
 };
 

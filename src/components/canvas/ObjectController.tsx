@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import KonvaController, { CurrentObject } from './core/KonvaController';
+import { CurrentObject } from './core/KonvaController';
 
 type Props = {
   currentObject: CurrentObject;
@@ -181,6 +181,16 @@ const ObjectController = ({ currentObject, updateAttr }: Props) => {
           />
           <span>점선 추가</span>
         </label>
+      </div>
+      <div>
+        <select>
+          <option>aa</option>
+          <option>aa</option>
+          <option>aa</option>
+          <option>aa</option>
+          <option>aa</option>
+          <option>aa</option>
+        </select>
       </div>
     </div>
   );
