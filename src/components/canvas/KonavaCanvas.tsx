@@ -4,6 +4,7 @@ import ObjectController from './ObjectController';
 import useKonvaCanvas from './hooks/useKonvaCanvas';
 import ObjectLayerController from './objectLayerController/ObjectLayerController';
 import './canvas.css';
+import TemplateList from './templateList/TemplateList';
 
 const KonavaCanvas = () => {
   const imageFile = useRef<HTMLInputElement>(null);
@@ -19,6 +20,7 @@ const KonavaCanvas = () => {
     addArrow,
     addTriangle,
     addText,
+    addTemplate,
     updateCanvasSize,
     resizeCanvas,
     updateAttr,
@@ -63,6 +65,7 @@ const KonavaCanvas = () => {
           id="canvas-file"
           onChange={onFileUploadChange}
         />
+        <TemplateList addTemplate={addTemplate} />
         <div>
           <input
             onChange={(e) => updateCanvasSize(e, 'width')}

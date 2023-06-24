@@ -157,6 +157,12 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     }
   };
 
+  const addTemplate = (templateName: string) => {
+    if (konvaController) {
+      konvaController.addTemplate(templateName);
+    }
+  };
+
   useEffect(() => {
     const controller = new KonvaController({
       id: 'konva-canvas',
@@ -181,6 +187,7 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     addText,
     addArrow,
     addTriangle,
+    addTemplate,
     updateCanvasSize,
     resizeCanvas,
     updateAttr,

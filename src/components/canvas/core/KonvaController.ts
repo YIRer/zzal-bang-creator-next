@@ -291,7 +291,7 @@ class KonvaController {
     this.onUpdateObjects();
   };
 
-  addImage = (image: HTMLImageElement) => {
+  addImage = (image: HTMLImageElement, isTempalte?: boolean) => {
     const stage = this.getStage();
 
     const stageWitdh = stage.width();
@@ -302,16 +302,18 @@ class KonvaController {
 
     const imageRatio = image.width / image.height;
 
-    const imageConfig =
-      image.width > image.height
-        ? {
-            width: image.width / widthRatio,
-            height: (image.height / heightRaio) * imageRatio,
-          }
-        : {
-            width: (image.width / widthRatio) * imageRatio,
-            height: image.height / heightRaio,
-          };
+    const imageConfig: Pick<Konva.ImageConfig, 'width' | 'height'> = {};
+
+    if (isTempalte) {
+      imageConfig.width = image.width;
+      imageConfig.height = image.height;
+    } else if (image.width > image.height) {
+      imageConfig.width = image.width / widthRatio;
+      imageConfig.height = (image.height / heightRaio) * imageRatio;
+    } else {
+      imageConfig.width = (image.width / widthRatio) * imageRatio;
+      imageConfig.height = image.height / heightRaio;
+    }
 
     const konvaImage = new Konva.Image({
       ...imageConfig,
@@ -321,6 +323,14 @@ class KonvaController {
       draggable: true,
       name: 'image',
     });
+
+    if (isTempalte) {
+      this.resizeCanvase({
+        width: image.width,
+        height: image.height,
+      });
+      konvaImage.moveToBottom();
+    }
 
     this.layer.add(konvaImage);
     this.layer.draw();
@@ -355,7 +365,7 @@ class KonvaController {
       y: 120,
       sides: 3,
       radius: 50,
-      fill: '#00D2FF',
+      fill: 'white',
       stroke: 'black',
       strokeWidth: 1,
       name: 'triangle',
@@ -367,14 +377,35 @@ class KonvaController {
     this.onUpdateObjects();
   };
 
+  addTemplate = (templateName: string) => {
+    const image = new Image();
+    image.onload = () => {
+      this.removeAllObjects();
+      this.addImage(image, true);
+    };
+    image.src = templateName;
+  };
+
   removeObject = () => {
     if (!this.currentObject.hasChildren()) {
       this.handleDeleteObject(this.currentObject);
-      this.currentObject.remove();
+      this.currentObject.destroy();
       this.currentObject.visible(false);
       this.transfomer.nodes([]);
-      this.handleSelectObject();
     }
+    this.onUpdateObjects();
+  };
+
+  removeAllObjects = () => {
+    const objects = this.getObjects();
+    objects.forEach((obj) => {
+      if (!obj.hasChildren()) {
+        obj.destroy();
+        obj.visible(false);
+      }
+    });
+
+    this.transfomer.nodes([]);
     this.onUpdateObjects();
   };
 
@@ -481,6 +512,7 @@ class KonvaController {
 
   onUpdateObjects = () => {
     if (this.handleUpdateObjects) {
+      this.transfomer.moveToTop();
       const objects = this.getObjects();
       this.handleUpdateObjects(objects);
     }
