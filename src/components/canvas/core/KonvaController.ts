@@ -1,3 +1,4 @@
+'use client';
 import Konva from 'konva';
 import { Transformer } from 'konva/lib/shapes/Transformer';
 
@@ -497,6 +498,7 @@ class KonvaController {
 
   exportImage = () => {
     const stage = this.getStage();
+    this.transformer.setNodes([]);
     const imageUrl = this.layer.toDataURL({
       mimeType: 'png',
       x: 0,
@@ -508,6 +510,7 @@ class KonvaController {
     link.href = imageUrl;
     link.download = new Date().getTime().toString();
     link.click();
+    this.transformer.setNodes([this.getCurrentObject()]);
   };
 
   selectCurrentObjectById = (id: number): CurrentObject | undefined => {
