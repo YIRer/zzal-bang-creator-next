@@ -1,0 +1,17 @@
+.templateWrapper {
+  display: flex;
+  gap: 16px;
+  width: 100vw;
+  height: 240px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+
+.templateItem {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 'use client';
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import Konva from 'konva';
+import { ChangeEvent, useEffect, useState } from 'react';
 import KonvaController, { CurrentObject } from '../core/KonvaController';
 
 type Props = {
@@ -50,10 +51,10 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
   };
 
   const updateCanvasSize = (
-    e: ChangeEvent<HTMLInputElement>,
+    inputValue: number | string,
     type: 'width' | 'height'
   ) => {
-    const targetValue = Number(e.target.value);
+    const targetValue = Number(inputValue);
     const value = targetValue === 0 ? 1 : targetValue;
     switch (type) {
       case 'width':
@@ -115,6 +116,7 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
 
   const updateAttr = (key: string, value: unknown) => {
     currentObject?.setAttr(key, value);
+    konvaController?.onUpdateObjects();
   };
 
   const moveToTop = () => {
@@ -163,12 +165,22 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     }
   };
 
+  const handleUpdateCurrentObject = (currentObject?: CurrentObject) => {
+    setCurrentObject(currentObject);
+  };
+
+  const handleUpdateStage = (stage: Konva.Stage) => {
+    setCanvasWidth(stage.width());
+    setCanvasHeight(stage.height());
+  };
+
   useEffect(() => {
     const controller = new KonvaController({
       id: 'konva-canvas',
-      onSelectObject: setCurrentObject,
+      onSelectObject: handleUpdateCurrentObject,
       onDeleteObject: onDeleteObject,
-      handleUpdateObjects: onUpdateObjects,
+      onUpdateObjects: onUpdateObjects,
+      onUpdateStage: handleUpdateStage,
     });
     setKonvaController(controller);
     controller.initialize();

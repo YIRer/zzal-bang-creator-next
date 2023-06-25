@@ -1,0 +1,104 @@
+{
+  "fonts": [
+    {
+      "label": "교보 손글씨체",
+      "value": "KyoboHandwriting2022khn"
+    },
+    {
+      "label": "완주 대둔산체",
+      "value": "TTWanjudaedunsancheB"
+    },
+    {
+      "label": "KBO 다이아 고딕체",
+      "value": "KBO-Dia-Gothic_bold"
+    },
+    {
+      "label": "하남다움체",
+      "value": "HANAMDAUM"
+    },
+    {
+      "label": "오뮤 다예쁨체",
+      "value": "omyu_pretty"
+    },
+    {
+      "label": "느림보고딕체",
+      "value": "neurimboGothicRegular"
+    },
+    {
+      "label": "MBC1961굴림체",
+      "value": "MBC1961GulimM"
+    },
+    {
+      "label": "롯데리아 함땡겨체",
+      "value": "LOTTERIACHAB"
+    },
+    {
+      "label": "롯데리아 딱붙어체",
+      "value": "LOTTERIADDAG"
+    },
+    {
+      "label": "Neo 둥근고딕 Pro체",
+      "value": "NeoDunggeunmoPro-Regular"
+    },
+    {
+      "label": "나눔 스퀘어 네오체",
+      "value": "NanumSquareNeo-Variable"
+    },
+    {
+      "label": "기후위기체",
+      "value": "ClimateCrisisKR"
+    },
+    {
+      "label": "라인 씨앗체",
+      "value": "LINESeedKR"
+    },
+    {
+      "label": "비트비트체",
+      "value": "bitbit"
+    },
+    {
+      "label": "태나다체",
+      "value": "Tenada"
+    },
+    {
+      "label": "을지로 오래오래체",
+      "value": "BMEuljirooraeorae"
+    },
+    {
+      "label": "함박눈체",
+      "value": "SF_HambakSnow"
+    },
+    {
+      "label": "함렛체",
+      "value": "Hahmlet"
+    },
+    {
+      "label": "Noto Mono",
+      "value": "Noto Mono"
+    },
+    {
+      "label": "noto serif",
+      "value": "noto serif"
+    },
+    {
+      "label": "Noto Sans Gothic",
+      "value": "Noto Sans Gothic"
+    },
+    {
+      "label": "Master Lemon",
+      "value": "Master Lemon"
+    },
+    {
+      "label": "Pistoleer",
+      "value": "Pistoleer"
+    },
+    {
+      "label": "Americorps",
+      "value": "Americorps"
+    },
+    {
+      "label": "Eternal Knight",
+      "value": "Eternal Knight"
+    }
+  ]
+}

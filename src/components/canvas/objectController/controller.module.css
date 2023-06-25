@@ -1,0 +1,13 @@
+.controllerWrapper {
+  position: absolute;
+  max-height: 600px;
+  max-width: 330px;
+  box-sizing: border-box;
+  top: 15vh;
+  right: 20px;
+  background-color: #fff;
+  padding: 8px;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  border-radius: 4px;
+}

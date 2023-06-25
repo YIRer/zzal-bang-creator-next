@@ -1,0 +1,35 @@
+.layerWrapper {
+  position: absolute;
+  bottom: 50px;
+  right: 20px;
+  background-color: #fff;
+  padding: 8px;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.rect {
+  width: 30px;
+  height: 30px;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+.name {
+  display: inline-flex;
+  align-items: center;
+  width: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,15 +1,24 @@
 'use client';
-import React, { useRef } from 'react';
-import ObjectController from './ObjectController';
+import React, { useEffect, useRef } from 'react';
+import {
+  FileImageFilled,
+  DownloadOutlined,
+  ZoomInOutlined,
+  ZoomOutOutlined,
+  UndoOutlined,
+} from '@ant-design/icons';
+import { Button, InputNumber, Space, Tooltip } from 'antd';
+import ObjectController from './objectController/ObjectController';
 import useKonvaCanvas from './hooks/useKonvaCanvas';
 import ObjectLayerController from './objectLayerController/ObjectLayerController';
-import './canvas.css';
 import TemplateList from './templateList/TemplateList';
+import Toolbox from './Toolbox';
+
+import styles from './canvas.module.css';
 
 const KonavaCanvas = () => {
   const imageFile = useRef<HTMLInputElement>(null);
   const {
-    konvaController,
     currentObject,
     cavnasWidth,
     cavnasHeight,
@@ -43,62 +52,110 @@ const KonavaCanvas = () => {
     },
   });
 
+  const handleCanvasWidthUpdate = (value: number | null) => {
+    if (value) {
+      updateCanvasSize(value, 'width');
+    }
+  };
+  const handleCanvasHeightUpdate = (value: number | null) => {
+    if (value) {
+      updateCanvasSize(value, 'height');
+    }
+  };
+
+  const handleUploadIconClick = () => {
+    if (imageFile.current) {
+      imageFile.current.click();
+    }
+  };
+
   return (
-    <div id="konva-canvas-conainer">
-      <div tabIndex={0} id="konva-canvas-wrapper">
-        <div id="konva-canvas"></div>
-      </div>
-      <div>
-        <button onClick={addRect}>add rect</button>
-        <button onClick={addCircle}>add circle</button>
-        <button onClick={addStar}>add star</button>
-        <button onClick={addArrow}>add arrow</button>
-        <button onClick={addTriangle}>add triangle</button>
-        <button onClick={addText}>add text</button>
-        <button onClick={onZoomInClick}>zoom in</button>
-        <button onClick={onZoomOutClick}>zoom out</button>
-        <button onClick={onZoomResetClick}>zoom reset</button>
-        <button onClick={onExportImageClick}>export image</button>
-        <input
-          ref={imageFile}
-          type="file"
-          id="canvas-file"
-          onChange={onFileUploadChange}
-        />
-        <TemplateList addTemplate={addTemplate} />
-        <div>
-          <input
-            onChange={(e) => updateCanvasSize(e, 'width')}
-            type={'number'}
-            name={'canvas-width'}
-            value={cavnasWidth}
-            min={1}
+    <div>
+      <div tabIndex={0} className={styles.canvasWrapper}>
+        <div id="konva-canvas" className={styles.canvas}></div>
+        <div className={styles.toolboxWrapper}>
+          <Toolbox
+            addRect={addRect}
+            addCircle={addCircle}
+            addStar={addStar}
+            addArrow={addArrow}
+            addTriangle={addTriangle}
+            addText={addText}
           />
-          <input
-            onChange={(e) => updateCanvasSize(e, 'height')}
-            type={'number'}
-            name={'canvas-height'}
-            value={cavnasHeight}
-            min={1}
-          />
-          <button onClick={resizeCanvas}>apply</button>
+          <Tooltip title="이미지 업로드" placement="right">
+            <Button
+              icon={<FileImageFilled />}
+              onClick={handleUploadIconClick}
+            ></Button>
+            <input
+              className={styles.fileInput}
+              ref={imageFile}
+              type="file"
+              accept="image/*"
+              id="canvas-file"
+              onChange={onFileUploadChange}
+            />
+          </Tooltip>
+          <Tooltip title="이미지 다운로드(png)" placement="right">
+            <Button icon={<DownloadOutlined />} onClick={onExportImageClick} />
+          </Tooltip>
         </div>
+        <div className={styles.resizeCanvasWrapper}>
+          <Space>
+            <InputNumber
+              onChange={handleCanvasWidthUpdate}
+              prefix="W"
+              type={'number'}
+              name={'canvas-width'}
+              value={cavnasWidth}
+              min={1}
+            />
+            <InputNumber
+              onChange={handleCanvasHeightUpdate}
+              prefix="H"
+              type={'number'}
+              name={'canvas-height'}
+              value={cavnasHeight}
+              min={1}
+            />
+            <Button onClick={resizeCanvas} type="text">
+              변경
+            </Button>
+          </Space>
+        </div>
+        <div className={styles.zoomBoxWrapper}>
+          <Space>
+            <Tooltip title="줌 인" placement="top">
+              <Button icon={<ZoomInOutlined />} onClick={onZoomInClick} />
+            </Tooltip>
+            <Tooltip title="줌 아웃" placement="top">
+              <Button icon={<ZoomOutOutlined />} onClick={onZoomOutClick} />
+            </Tooltip>
+            <Tooltip title="줌 리셋" placement="top">
+              <Button icon={<UndoOutlined />} onClick={onZoomResetClick} />
+            </Tooltip>
+          </Space>
+        </div>
+        {objects.length > 0 && (
+          <ObjectLayerController
+            objects={objects}
+            selectCurrentObject={selectCurrentObject}
+            moveToTop={moveToTop}
+            moveToFoward={moveToFoward}
+            moveToBackward={moveToBackward}
+            moveToBottom={moveToBottom}
+            removeObject={removeObject}
+          />
+        )}
+        {currentObject && (
+          <ObjectController
+            currentObject={currentObject}
+            updateAttr={updateAttr}
+          />
+        )}
       </div>
-      <ObjectLayerController
-        objects={objects}
-        selectCurrentObject={selectCurrentObject}
-        moveToTop={moveToTop}
-        moveToFoward={moveToFoward}
-        moveToBackward={moveToBackward}
-        moveToBottom={moveToBottom}
-        removeObject={removeObject}
-      />
-      {currentObject && konvaController && (
-        <ObjectController
-          currentObject={currentObject}
-          updateAttr={updateAttr}
-        />
-      )}
+
+      <TemplateList addTemplate={addTemplate} />
     </div>
   );
 };

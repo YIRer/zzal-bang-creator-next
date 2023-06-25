@@ -20,21 +20,24 @@ class KonvaController {
     height: 500,
   };
   private zoomLevel: number = 1;
-  private transfomer: Konva.Transformer;
+  private transformer: Konva.Transformer;
   private handleSelectObject: (target?: CurrentObject) => void;
   private handleDeleteObject: (target?: CurrentObject) => void;
   private handleUpdateObjects?: (objects: CurrentObject[]) => void;
+  private handleUpdateStage?: (stage: Konva.Stage) => void;
 
   constructor({
     id,
     onSelectObject,
     onDeleteObject,
-    handleUpdateObjects,
+    onUpdateObjects,
+    onUpdateStage,
   }: {
     id: string;
     onSelectObject: (target?: CurrentObject) => void;
     onDeleteObject: (target?: CurrentObject) => void;
-    handleUpdateObjects?: (objects: CurrentObject[]) => void;
+    onUpdateObjects?: (objects: CurrentObject[]) => void;
+    onUpdateStage?: (stage: Konva.Stage) => void;
   }) {
     this.id = id;
     this.stage = new Konva.Stage({
@@ -43,18 +46,13 @@ class KonvaController {
       height: this.size.height,
     });
 
-    this.transfomer = new Transformer({
-      boundBoxFunc: function (_oldBox, newBox) {
-        newBox.width = Math.max(30, newBox.width);
-        return newBox;
-      },
-    });
+    this.transformer = new Transformer();
 
     this.layer = new Konva.Layer({
       name: 'main-layer',
     });
 
-    this.layer.add(this.transfomer);
+    this.layer.add(this.transformer);
 
     this.stage.add(this.layer);
 
@@ -63,8 +61,11 @@ class KonvaController {
     this.currentObject = this.stage;
     this.handleSelectObject = onSelectObject;
     this.handleDeleteObject = onDeleteObject;
-    if (handleUpdateObjects) {
-      this.handleUpdateObjects = handleUpdateObjects;
+    if (onUpdateObjects) {
+      this.handleUpdateObjects = onUpdateObjects;
+    }
+    if (onUpdateStage) {
+      this.handleUpdateStage = onUpdateStage;
     }
   }
 
@@ -82,12 +83,13 @@ class KonvaController {
         this.currentObject = e.target;
       }
       if (e.target === this.stage) {
-        this.transfomer.nodes([]);
+        this.transformer.setNodes([]);
         this.handleSelectObject(undefined);
         return;
       }
 
-      this.transfomer.nodes([e.target]);
+      this.transformer.setNodes([]);
+      this.transformer.setNodes([e.target]);
       this.handleSelectObject(e.target);
     });
   };
@@ -118,9 +120,9 @@ class KonvaController {
       height: 50,
       x: 0,
       y: 0,
-      fill: 'white',
+      fill: '#fff',
       strokeWidth: 1,
-      stroke: 'grey',
+      stroke: '#aaa',
       name: 'rect',
       draggable: true,
       ...configs,
@@ -137,9 +139,9 @@ class KonvaController {
       height: 50,
       x: 25,
       y: 25,
-      fill: 'white',
+      fill: '#fff',
       strokeWidth: 1,
-      stroke: 'grey',
+      stroke: '#aaa',
       name: 'circle',
       draggable: true,
       ...configs,
@@ -157,7 +159,7 @@ class KonvaController {
       y: 100,
       fill: 'yellow',
       strokeWidth: 1,
-      stroke: 'grey',
+      stroke: '#aaa',
       name: 'star',
       numPoints: 5,
       innerRadius: 40,
@@ -174,9 +176,11 @@ class KonvaController {
     const textNode = new Konva.Text({
       x: 0,
       y: 0,
-      text: 'text',
+      text: '내용입력',
       name: 'text',
-      fontSize: 20,
+      color: '#000',
+      fontFamily: 'NanumSquareNeo-Variable',
+      fontSize: 30,
       draggable: true,
       ...configs,
     });
@@ -190,7 +194,7 @@ class KonvaController {
 
     textNode.on('dblclick dbltap', () => {
       textNode.hide();
-      this.transfomer.hide();
+      this.transformer.hide();
       const textPosition = textNode.getAbsolutePosition();
 
       const stageBox = this.constianer.getBoundingClientRect();
@@ -246,7 +250,7 @@ class KonvaController {
       textarea.style.height = textarea.scrollHeight + 3 + 'px';
 
       textarea.focus();
-      const transfomer = this.transfomer;
+      const transformer = this.transformer;
 
       function handleOutsideClick(e: MouseEvent) {
         if (e.target !== textarea) {
@@ -259,14 +263,16 @@ class KonvaController {
         textarea.parentNode?.removeChild(textarea);
         window.removeEventListener('click', handleOutsideClick);
         textNode.show();
-        transfomer.show();
-        transfomer.forceUpdate();
+        transformer.show();
+        transformer.forceUpdate();
       }
 
       textarea.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           textNode.text(textarea.value);
           removeTextarea();
+
+          this.onUpdateObjects();
           return;
         }
 
@@ -329,10 +335,13 @@ class KonvaController {
         width: image.width,
         height: image.height,
       });
+      if (this.handleUpdateStage) {
+        this.handleUpdateStage(this.getStage());
+      }
       konvaImage.moveToBottom();
     }
-
     this.layer.add(konvaImage);
+
     this.layer.draw();
     this.onUpdateObjects();
   };
@@ -347,8 +356,8 @@ class KonvaController {
       y: 0,
       pointerLength: 10,
       pointerWidth: 10,
-      fill: 'white',
-      stroke: 'black',
+      fill: '#fff',
+      stroke: '#000',
       strokeWidth: 1,
       name: 'arrow',
       draggable: true,
@@ -365,8 +374,8 @@ class KonvaController {
       y: 120,
       sides: 3,
       radius: 50,
-      fill: 'white',
-      stroke: 'black',
+      fill: '#fff',
+      stroke: '#000',
       strokeWidth: 1,
       name: 'triangle',
       draggable: true,
@@ -391,7 +400,7 @@ class KonvaController {
       this.handleDeleteObject(this.currentObject);
       this.currentObject.destroy();
       this.currentObject.visible(false);
-      this.transfomer.nodes([]);
+      this.transformer.setNodes([]);
     }
     this.onUpdateObjects();
   };
@@ -405,7 +414,7 @@ class KonvaController {
       }
     });
 
-    this.transfomer.nodes([]);
+    this.transformer.setNodes([]);
     this.onUpdateObjects();
   };
 
@@ -487,12 +496,13 @@ class KonvaController {
   };
 
   exportImage = () => {
+    const stage = this.getStage();
     const imageUrl = this.layer.toDataURL({
       mimeType: 'png',
       x: 0,
       y: 0,
-      width: 300,
-      height: 300,
+      width: stage.width(),
+      height: stage.height(),
     });
     const link = document.createElement('a');
     link.href = imageUrl;
@@ -505,14 +515,14 @@ class KonvaController {
 
     if (targetObject) {
       this.currentObject = targetObject as CurrentObject;
-      this.transfomer.nodes([targetObject]);
+      this.transformer.setNodes([targetObject]);
     }
     return targetObject as CurrentObject | undefined;
   };
 
   onUpdateObjects = () => {
     if (this.handleUpdateObjects) {
-      this.transfomer.moveToTop();
+      this.transformer.moveToTop();
       const objects = this.getObjects();
       this.handleUpdateObjects(objects);
     }
