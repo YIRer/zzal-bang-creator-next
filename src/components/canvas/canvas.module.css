@@ -1,6 +1,6 @@
 .canvasWrapper {
   width: 100%;
-  height: calc(100vh - 240px);
+  height: calc(100vh - 320px);
   padding: 20px;
   overflow: scroll;
   background-color: #aaa;
@@ -29,6 +29,12 @@
   border-radius: 6px;
   border: 1px solid #eee;
   box-sizing: border-box;
+}
+
+.fileUploadWrapper {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
 }
 
 .fileInput {

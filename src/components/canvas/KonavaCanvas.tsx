@@ -83,18 +83,20 @@ const KonavaCanvas = () => {
             addText={addText}
           />
           <Tooltip title="이미지 업로드" placement="right">
-            <Button
-              icon={<FileImageFilled />}
-              onClick={handleUploadIconClick}
-            ></Button>
-            <input
-              className={styles.fileInput}
-              ref={imageFile}
-              type="file"
-              accept="image/*"
-              id="canvas-file"
-              onChange={onFileUploadChange}
-            />
+            <span className={styles.fileUploadWrapper}>
+              <Button
+                icon={<FileImageFilled />}
+                onClick={handleUploadIconClick}
+              ></Button>
+              <input
+                className={styles.fileInput}
+                ref={imageFile}
+                type="file"
+                accept="image/*"
+                id="canvas-file"
+                onChange={onFileUploadChange}
+              />
+            </span>
           </Tooltip>
           <Tooltip title="이미지 다운로드(png)" placement="right">
             <Button icon={<DownloadOutlined />} onClick={onExportImageClick} />

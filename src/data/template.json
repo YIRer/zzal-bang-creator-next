@@ -111,12 +111,28 @@
       "name": "그리움"
     },
     {
+      "path": "/template/anime/021.png",
+      "name": "선택하기 힘듬"
+    },
+    {
       "path": "/template/anime/022.png",
       "name": "하이디"
     },
     {
       "path": "/template/anime/023.png",
       "name": "배트맨"
+    },
+    {
+      "path": "/template/anime/024.png",
+      "name": "더이상은자세한"
+    },
+    {
+      "path": "/template/anime/025.png",
+      "name": "청와대로간다"
+    },
+    {
+      "path": "/template/anime/026.png",
+      "name": "서비스종료다"
     }
   ],
   "etd": [
@@ -165,6 +181,22 @@
     {
       "path": "/template/human/009.png",
       "name": "비교"
+    },
+    {
+      "path": "/template/human/010.png",
+      "name": "마참내"
+    },
+    {
+      "path": "/template/human/011.png",
+      "name": "즐겁다"
+    },
+    {
+      "path": "/template/human/012.png",
+      "name": "죄송하다"
+    },
+    {
+      "path": "/template/human/013.png",
+      "name": "진짜지?"
     }
   ],
   "pepe": [

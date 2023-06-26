@@ -1,11 +1,13 @@
 .layerWrapper {
+  max-height: 120px;
+  overflow: auto;
   position: absolute;
   bottom: 50px;
   right: 20px;
   background-color: #fff;
   padding: 8px;
   border: 1px solid #eee;
-  box-sizing: border-box;
+  box-sizing: content-box;
   border-radius: 4px;
 }
 
