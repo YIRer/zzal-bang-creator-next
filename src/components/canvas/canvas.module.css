@@ -1,13 +1,19 @@
+.editorWrapper {
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+  position: relative;
+}
+
 .canvasWrapper {
   width: 100%;
-  height: calc(100vh - 320px);
+  height: 100%;
   padding: 20px;
   overflow: scroll;
   background-color: #aaa;
   box-sizing: border-box;
   text-align: center;
   display: grid;
-  position: relative;
 }
 
 .canvas {

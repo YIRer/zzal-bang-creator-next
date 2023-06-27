@@ -71,8 +71,11 @@ const KonavaCanvas = () => {
 
   return (
     <div>
-      <div tabIndex={0} className={styles.canvasWrapper}>
-        <div id="konva-canvas" className={styles.canvas}></div>
+      <div className={styles.editorWrapper}>
+        <div tabIndex={0} className={styles.canvasWrapper}>
+          <div id="konva-canvas" className={styles.canvas}></div>
+        </div>
+
         <div className={styles.toolboxWrapper}>
           <Toolbox
             addRect={addRect}

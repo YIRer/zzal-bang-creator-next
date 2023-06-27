@@ -83,7 +83,9 @@ const ObjectLayerItem = ({
 
   return (
     <Space onClick={handleObjectItemClick}>
-      <Shape type={object.name()} fill={object.attrs.fill as string} />
+      <div className={styles.shape}>
+        <Shape type={object.name()} fill={object.attrs.fill as string} />
+      </div>
       <span className={styles.name}>
         <Typography.Text ellipsis={true}>
           {object.name() !== 'text' ? name : object.attrs.text}
