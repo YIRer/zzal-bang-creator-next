@@ -74,7 +74,7 @@ class KonvaController {
     this.constianer.tabIndex = 1;
 
     this.constianer.addEventListener('keydown', (e) => {
-      if (e.key === 'Delete') {
+      if (e.key === 'Delete' || e.key === 'Backspace') {
         this.removeObject();
       }
     });
@@ -528,6 +528,12 @@ class KonvaController {
       this.transformer.moveToTop();
       const objects = this.getObjects();
       this.handleUpdateObjects(objects);
+    }
+  };
+
+  clearTransformer = () => {
+    if (this.transformer) {
+      this.transformer.setNodes([]);
     }
   };
 }

@@ -174,6 +174,10 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     setCanvasHeight(stage.height());
   };
 
+  const clearTransformer = () => {
+    konvaController?.clearTransformer();
+  };
+
   useEffect(() => {
     const controller = new KonvaController({
       id: 'konva-canvas',
@@ -214,6 +218,7 @@ const useKonvaCanvas = ({ onDeleteObject }: Props) => {
     moveToBackward,
     selectCurrentObject,
     removeObject,
+    clearTransformer,
   };
 };
 

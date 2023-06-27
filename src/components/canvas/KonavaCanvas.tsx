@@ -44,6 +44,7 @@ const KonavaCanvas = () => {
     moveToBackward,
     selectCurrentObject,
     removeObject,
+    clearTransformer,
   } = useKonvaCanvas({
     onDeleteObject: (target) => {
       if (target?.attrs.name === 'image' && imageFile.current) {
@@ -69,10 +70,20 @@ const KonavaCanvas = () => {
     }
   };
 
+  const handleStageClick = (e: React.SyntheticEvent) => {
+    if ((e.target as HTMLElement).tagName === 'DIV') {
+      clearTransformer();
+    }
+  };
+
   return (
     <div>
       <div className={styles.editorWrapper}>
-        <div tabIndex={0} className={styles.canvasWrapper}>
+        <div
+          tabIndex={0}
+          className={styles.canvasWrapper}
+          onClick={handleStageClick}
+        >
           <div id="konva-canvas" className={styles.canvas}></div>
         </div>
 
